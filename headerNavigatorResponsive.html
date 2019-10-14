@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Header Navigation</title>
+</head>
+<style>
+    body {
+        font-family: sans-serif !important;
+        padding: 0;
+        margin: 0;
+    }
+    .navbar{
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    .header-menu {
+        background-color: #B33437;
+        color:white;
+        height: 28px;
+    }
+    .header-menu .small-menu { display: none; }
+    .header-menu .header-options,
+    .header-items .submenu-options,
+    .submenu-items .deepmenu-options {
+        list-style: none;
+        list-style-position: outside;
+        list-style-type: none;
+    }
+    .header-menu > .header-options .header-items {
+        float: left;
+        position: relative;
+    }
+    .header-menu .header-options,
+    .header-items .submenu-options,
+    .submenu-items .deepmenu-options {
+        margin: 0;
+        padding: 0;
+    }
+    .header-items .submenu-options {
+        position: absolute;
+        top: 28px;
+    }
+    .header-options .header-items > div,
+    .submenu-options .submenu-items > div,
+    .deepmenu-options .deepmenu-items > div {
+        height: 28px;
+        padding: 0px 15px 0px 15px;
+    }
+    
+    .header-options .header-items > div { text-align: center; }
+    .submenu-options .submenu-items > div,
+    .deepmenu-options .deepmenu-items > div { text-align: left; }
+    
+    /* ORDENANDO SUB LISTA */
+    .submenu-options .submenu-items,
+    .deepmenu-options .deepmenu-items {
+        position: relative;
+        width: 280px;
+    }
+    .submenu-items .deepmenu-options {
+        float: right;
+        left: 280px;
+        position: absolute;
+        top: 0;
+    }
+
+    /* ESTILO DE LAS OPCIONES */
+    .header-options .header-items div a,
+    .submenu-options .submenu-items div a,
+    .deepmenu-options .deepmenu-items div a {
+        color: #FFF;
+        font-size: 12px;
+        font-weight: bold;
+        text-decoration: none;
+        vertical-align:-webkit-baseline-middle;
+    }
+    .submenu-options .submenu-items > div,
+    .deepmenu-options .deepmenu-items > div {
+        background-color: #C70039;
+    } 
+
+    /* OCULTANDO LISTAS */
+    .header-items .submenu-options,
+    .submenu-items .deepmenu-options {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    /* ACCIONES CON :HOVER */
+    .header-options .header-items div:hover,
+    .submenu-options:hover ~ div,
+    .deepmenu-options:hover ~ div {
+        background-color: #FFC30F;
+    }
+    .header-options .header-items:hover > .submenu-options,
+    .submenu-options .submenu-items:hover > .deepmenu-options {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    @media screen and (max-width: 980px) {
+        /* MODELADO SELECTOR MENU */
+        .header-menu .small-menu {
+            background-color: #B33437;
+            border: none;
+            display: block;
+            height: 28px;
+            padding-left: 6px;
+            width: 38px;
+            text-align: right;
+        }
+        .header-menu .small-menu div {
+            background-color: #FFF;
+            height: 2px;
+            width: 24px;
+        }
+        .header-menu .small-menu div:nth-child(even) {
+            margin-top: 4px;
+            margin-bottom: 4px;
+        }
+        /* CARACTERISTICAS MENU PRINCIPAL */
+        .header-menu .header-options,
+        .header-items .submenu-options,
+        .submenu-items .deepmenu-options {
+            display: none;
+            opacity: 0;
+            visibility: hidden;
+        }
+        .header-menu > .header-options .header-items {
+            float:none;
+            display: block;
+            position: relative;
+        }
+        .header-options > .header-items,
+        .submenu-options > .submenu-items,
+        .deepmenu-options > .deepmenu-items { border-bottom: 1px solid #C70039; }
+        .header-options > .header-items:first-child,
+        .submenu-options > .submenu-items:first-child,
+        .deepmenu-options > .deepmenu-items:first-child { border-top: 1px solid #C70039;}
+        .header-items > .submenu-options,
+        .submenu-items > .deepmenu-options {
+            border: none;
+            float:none;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            top: 0;
+        }
+        .submenu-options .submenu-items,
+        .submenu-items .deepmenu-options,
+        .deepmenu-options .deepmenu-items {left: 0;width: 100%;}
+        
+        /* SELECCION DE OPCION PARA MOSTRAR SUBMENUS */
+        .header-options .header-items:hover > .submenu-options,
+        .submenu-options .submenu-items:hover > .deepmenu-options { display: block; }
+        .header-options .header-items:hover,
+        .submenu-options .submenu-items:hover,
+        .deepmenu-options .header-items:hover {
+            display: flex;
+            flex-direction: column-reverse;
+        }
+
+        /* EVENTO SELECCION SHOW MENU */
+        .header-menu .small-menu:focus ~ .header-options {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+            background-color: #B33437;
+        }
+    }
+</style>
+<body>
+    <div class="navbar">
+        <div class="header-menu">
+            <button type="button" class="small-menu">
+                <div></div>
+                <div></div>
+                <div></div>
+            </button>
+            <ul class="header-options">
+                <li class="header-items">
+                    <div>
+                        <a href="">Item 1</a>
+                    </div>
+                </li>
+                <li class="header-items">
+                    <ul class="submenu-options">
+                        <li class="submenu-items">
+                            <div>
+                                <a href="">Subitem 1</a>
+                            </div>
+                        </li>
+                        <li class="submenu-items">
+                            <ul class="deepmenu-options">
+                                <li class="deepmenu-items">
+                                    <div>
+                                        <a href="">Deep Item 1</a>
+                                    </div>
+                                </li>
+                                <li class="deepmenu-items">
+                                    <div>
+                                        <a href="">Deep Item 2</a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div>
+                                <a href="">Subitem 3</a>
+                            </div>
+                        </li>
+                        <li class="submenu-items">
+                                <ul class="deepmenu-options">
+                                    <li class="deepmenu-items">
+                                        <div>
+                                            <a href="">Deep Item 1</a>
+                                        </div>
+                                    </li>
+                                    <li class="deepmenu-items">
+                                        <div>
+                                            <a href="">Deep Item 2</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            <div>
+                                <a href="">Subitem 1</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div>
+                        <a href="">Item 2</a>
+                    </div>
+                </li>
+                <li class="header-items">
+                    <div>
+                        <a href="">Item 3</a>
+                    </div>
+                </li>
+                <li class="header-items">
+                    <ul class="submenu-options">
+                        <li class="submenu-items">
+                            <div>
+                                <a href="">Subitem 1</a>
+                            </div>
+                        </li>
+                        <li class="submenu-items">
+                            <ul class="deepmenu-options">
+                                <li class="deepmenu-items">
+                                    <div>
+                                        <a href="">Deep Item 1</a>
+                                    </div>
+                                </li>
+                                <li class="deepmenu-items">
+                                    <div>
+                                        <a href="">Deep Item 2</a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div>
+                                <a href="">Subitem 3</a>
+                            </div>
+                        </li>
+                        <li class="submenu-items">
+                                <ul class="deepmenu-options">
+                                    <li class="deepmenu-items">
+                                        <div>
+                                            <a href="">Deep Item 1</a>
+                                        </div>
+                                    </li>
+                                    <li class="deepmenu-items">
+                                        <div>
+                                            <a href="">Deep Item 2</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            <div>
+                                <a href="">Subitem 1</a>
+                            </div>
+                        </li>
+                    </ul>
+                    <div>
+                        <a href="">Item 4</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
